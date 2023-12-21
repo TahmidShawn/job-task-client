@@ -7,6 +7,7 @@ import Dashboard from "../layout/Dashboard/Dashboard";
 import CreateNewTask from "../pages/CreateNewTask/CreateNewTask";
 import SeePreviousTasks from "../pages/SeePreviousTasks/SeePreviousTasks";
 import PrivateRoutes from "./PrivateRoutes";
+import SeeAllTasks from "../pages/SeeAllTasks/SeeAllTasks";
 
 const Routes = createBrowserRouter([
     {
@@ -33,11 +34,16 @@ const Routes = createBrowserRouter([
         children: [
             {
                 path: 'createNewTask',
-                element: <CreateNewTask></CreateNewTask>
+                element: <PrivateRoutes><CreateNewTask></CreateNewTask></PrivateRoutes>
             },
             {
                 path: 'seePreviousTasks',
-                element: <SeePreviousTasks></SeePreviousTasks>,
+                element: <PrivateRoutes><SeePreviousTasks></SeePreviousTasks></PrivateRoutes>,
+                loader: () => fetch('http://localhost:5000/task')
+            },
+            {
+                path: 'seeAllTasks',
+                element: <PrivateRoutes><SeeAllTasks></SeeAllTasks></PrivateRoutes>,
                 loader: () => fetch('http://localhost:5000/task')
             }
         ]
