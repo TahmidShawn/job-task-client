@@ -1,11 +1,12 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
-
+    const navigate = useNavigate()
+    // const location = useLocation()
     const navLinks = <>
         <NavLink to='/'>Home</NavLink>
         <NavLink to='/task'>Task</NavLink>
@@ -20,9 +21,11 @@ const Navbar = () => {
             .then(result => {
                 console.log(result);
                 toast.success('LogOut Successfully Done!');
+                navigate('/')
             })
             .catch(error => {
                 console.log(error);
+
             })
     }
     return (
@@ -51,6 +54,7 @@ const Navbar = () => {
                         <div className="flex gap-3">
                             <img className="w-10 rounded-full" src={user.photoURL} alt="" />
                             <button onClick={handleLogOut}>LogOut</button>
+
                         </div>
                         :
                         <Link to='/login'>

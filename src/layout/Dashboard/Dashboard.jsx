@@ -19,6 +19,9 @@ const Dashboard = () => {
                     <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
                         {/* Sidebar content here */}
                         <img src={user?.photoURL} className="w-20 h-20 mx-auto rounded-full mb-3" alt="" />
+                        <Link to='/'>
+                            <button className="btn mb-2 btn-outline w-full rounded-none">Home</button>
+                        </Link>
                         <Link to='createNewTask'>
                             <button className="btn mb-2 btn-outline w-full rounded-none">Create New Task</button>
                         </Link>

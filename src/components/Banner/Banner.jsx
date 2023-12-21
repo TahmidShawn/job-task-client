@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import banner from './../../assets/banner.jpg'
 
 const Banner = () => {
@@ -13,7 +14,9 @@ const Banner = () => {
                             <h1>with Quivvy</h1>
 
                         </div>
-                        <button className='btn text-[#686529]  mt-8 bg-base-200  max-w-xs w-full'>Let's Explore</button>
+                        <Link to='/login'>
+                            <button className='btn text-[#686529]  mt-8 bg-base-200  max-w-xs w-full'>Let's Explore</button>
+                        </Link>
                     </div>
                 </div>
             </div>
