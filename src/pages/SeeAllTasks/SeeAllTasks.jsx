@@ -1,7 +1,8 @@
 import { useLoaderData } from "react-router-dom";
-import Task from "./Task";
+
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
+import Task from "./Task";
 
 const SeeAllTasks = () => {
 
@@ -12,9 +13,7 @@ const SeeAllTasks = () => {
         setTasks(allTasks)
     }, [allTasks])
 
-    useEffect(() => {
-        setTasks(tasks)
-    }, [tasks])
+
     console.log(tasks);
     const handleDelete = _id => {
         console.log(_id);

@@ -8,6 +8,7 @@ import CreateNewTask from "../pages/CreateNewTask/CreateNewTask";
 import SeePreviousTasks from "../pages/SeePreviousTasks/SeePreviousTasks";
 import PrivateRoutes from "./PrivateRoutes";
 import SeeAllTasks from "../pages/SeeAllTasks/SeeAllTasks";
+import Update from "../pages/Update/Update";
 
 const Routes = createBrowserRouter([
     {
@@ -25,6 +26,11 @@ const Routes = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register>
+            },
+            {
+                path: 'update/:id',
+                element: <Update></Update>,
+                loader: ({ params }) => fetch(`http://localhost:5000/task/${params.id}`)
             }
         ]
     },
@@ -45,7 +51,8 @@ const Routes = createBrowserRouter([
                 path: 'seeAllTasks',
                 element: <PrivateRoutes><SeeAllTasks></SeeAllTasks></PrivateRoutes>,
                 loader: () => fetch('http://localhost:5000/task')
-            }
+            },
+
         ]
     },
 

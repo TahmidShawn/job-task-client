@@ -29,7 +29,7 @@ const Dashboard = () => {
                             <button className="btn mb-2 btn-outline w-full rounded-none">See Previous Tasks</button>
                         </Link>
                         <Link to='seeAllTasks'>
-                            <button className="btn mb-2 btn-outline w-full rounded-none">See All Tasks</button>
+                            <button className="btn mb-2 btn-outline w-full rounded-none">Manage All Tasks</button>
                         </Link>
                     </ul>
 

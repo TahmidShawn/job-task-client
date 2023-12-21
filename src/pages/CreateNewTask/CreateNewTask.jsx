@@ -3,6 +3,9 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 
+import Swal from "sweetalert2";
+// import toast from "react-hot-toast";
+
 const CreateNewTask = () => {
     const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, reset } = useForm();
@@ -23,8 +26,14 @@ const CreateNewTask = () => {
         console.log(taskRes.data)
         if (taskRes.data.insertedId) {
             // show success popup
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Task Added",
+                showConfirmButton: false,
+                timer: 1500
+            });
             reset();
-            alert('added')
         }
         else {
             // Handle the case where insertedId is not present in the response
@@ -38,7 +47,7 @@ const CreateNewTask = () => {
     return (
         <div className="mt-10">
 
-            <h1 className="text-center text-4xl font-bold">Add Your Job</h1>
+            <h1 className="text-center text-4xl font-bold">Add Your Task</h1>
             <div className="max-w-5xl mx-auto shadow-md p-10 border-[6px] mt-10">
 
                 <form onSubmit={handleSubmit(onSubmit)}>
