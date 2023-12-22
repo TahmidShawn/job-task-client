@@ -47,12 +47,12 @@ const SeePreviousTasks = () => {
     const moveTask = (fromIndex, toIndex) => {
         const updatedTasks = [...tasks];
         const [movedTask] = updatedTasks.splice(fromIndex, 1);
-        movedTask.status = toIndex === tasks.length ? 'COMPLETED' : 'ONGOING';
+        movedTask.status = toIndex === tasks.length ? 'COMPLETED' : toIndex === tasks.length + 1 ? 'ONGOING' : 'TO-DO';
         updatedTasks.splice(toIndex, 0, movedTask);
         setTasks(updatedTasks);
     };
 
-    // Drop ref for the "COMPLETED" section
+    // Drop refs for the "COMPLETED" and "ONGOING" sections
     const [, dropCompleted] = useDrop({
         accept: 'TASK',
         hover: (draggedItem) => {
@@ -63,9 +63,20 @@ const SeePreviousTasks = () => {
         },
     });
 
+    const [, dropOngoing] = useDrop({
+        accept: 'TASK',
+        hover: (draggedItem) => {
+            const ongoingIndex = tasks.findIndex((task) => task.status === 'ONGOING');
+            if (draggedItem.index !== ongoingIndex && ongoingIndex !== -1) {
+                moveTask(draggedItem.index, ongoingIndex);
+                draggedItem.index = ongoingIndex;
+            }
+        },
+    });
+
     return (
         <div className="flex gap-5 justify-between">
-            <div className="bg-[#C8EBCE] w-full">
+            <div ref={dropCompleted} className="bg-[#C8EBCE] w-full">
                 <h1 className="text-center text-2xl my-3">TO-DO</h1>
                 <div>
                     {tasks
@@ -75,21 +86,23 @@ const SeePreviousTasks = () => {
                         ))}
                 </div>
             </div>
-            <div className="bg-[#E7F59E] w-full">
-                <h1 className="text-center text-2xl my-3">ONGOING</h1>
-                <div>
-                    {tasks
-                        .filter((task) => task.status === 'ONGOING')
-                        .map((task, index) => (
-                            <Task key={task._id} task={task} index={index} moveTask={(from, to) => moveTask(from, to)} />
-                        ))}
-                </div>
-            </div>
+
             <div ref={dropCompleted} className="bg-[#d5bdaf] w-full">
                 <h1 className="text-center text-2xl my-3">COMPLETED</h1>
                 <div>
                     {tasks
                         .filter((task) => task.status === 'COMPLETED')
+                        .map((task, index) => (
+                            <Task key={task._id} task={task} index={index} moveTask={(from, to) => moveTask(from, to)} />
+                        ))}
+                </div>
+            </div>
+
+            <div ref={dropOngoing} className="bg-[#E7F59E] w-full">
+                <h1 className="text-center text-2xl my-3">ONGOING</h1>
+                <div>
+                    {tasks
+                        .filter((task) => task.status === 'ONGOING')
                         .map((task, index) => (
                             <Task key={task._id} task={task} index={index} moveTask={(from, to) => moveTask(from, to)} />
                         ))}
