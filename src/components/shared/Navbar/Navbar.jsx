@@ -6,15 +6,17 @@ import toast from "react-hot-toast";
 
 const Navbar = () => {
     const navigate = useNavigate()
+    const { user, logOut } = useContext(AuthContext)
+    console.log(user);
     // const location = useLocation()
     const navLinks = <>
         <NavLink to='/'>Home</NavLink>
-        <NavLink to='/task'>Task</NavLink>
-        <NavLink to='dashboard'>Dashboard</NavLink>
+        {
+            user && <NavLink to='dashboard'>Dashboard</NavLink>
+        }
 
     </>
-    const { user, logOut } = useContext(AuthContext)
-    console.log(user);
+
 
     const handleLogOut = () => {
         logOut()

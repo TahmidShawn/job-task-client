@@ -27,7 +27,7 @@ const SeeAllTasks = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/task/${_id}`, {
+                fetch(`https://job-task-server-taupe.vercel.app/task/${_id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())

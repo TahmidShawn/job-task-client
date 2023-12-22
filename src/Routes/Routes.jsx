@@ -30,7 +30,7 @@ const Routes = createBrowserRouter([
             {
                 path: 'update/:id',
                 element: <Update></Update>,
-                loader: ({ params }) => fetch(`http://localhost:5000/task/${params.id}`)
+                loader: ({ params }) => fetch(`https://job-task-server-taupe.vercel.app/task/${params.id}`)
             }
         ]
     },
@@ -45,12 +45,12 @@ const Routes = createBrowserRouter([
             {
                 path: 'seePreviousTasks',
                 element: <PrivateRoutes><SeePreviousTasks></SeePreviousTasks></PrivateRoutes>,
-                loader: () => fetch('http://localhost:5000/task')
+                loader: () => fetch('https://job-task-server-taupe.vercel.app/task')
             },
             {
                 path: 'seeAllTasks',
                 element: <PrivateRoutes><SeeAllTasks></SeeAllTasks></PrivateRoutes>,
-                loader: () => fetch('http://localhost:5000/task')
+                loader: () => fetch('https://job-task-server-taupe.vercel.app/task')
             },
 
         ]

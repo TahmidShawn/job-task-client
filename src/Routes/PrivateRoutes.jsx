@@ -16,7 +16,7 @@ const PrivateRoutes = ({ children }) => {
         return children;
     }
 
-    return navigate(location?.state ? location.state : '/')
+    return navigate(location?.state ? location.state : '/login')
 };
 
 export default PrivateRoutes;

@@ -30,7 +30,7 @@ const Update = () => {
 
 
         // send data to the server .
-        fetch(`http://localhost:5000/task/${_id}`, {
+        fetch(`https://job-task-server-taupe.vercel.app/task/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
